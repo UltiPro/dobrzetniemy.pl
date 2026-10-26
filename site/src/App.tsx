@@ -1,6 +1,7 @@
 import { MotionConfig } from 'motion/react'
 import { About } from './components/About'
 import { Area } from './components/Area'
+import { Benefits } from './components/Benefits'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { Gallery } from './components/Gallery'
@@ -9,6 +10,7 @@ import { HeightGauge } from './components/HeightGauge'
 import { Hero } from './components/Hero'
 import { Marquee } from './components/Marquee'
 import { MobileCallBar } from './components/MobileCallBar'
+import { Reviews } from './components/Reviews'
 import { Services } from './components/Services'
 
 export default function App() {
@@ -26,6 +28,8 @@ export default function App() {
         <Marquee />
         <Services />
         <Gallery />
+        <Benefits />
+        <Reviews />
         <About />
         <Area />
         <Contact />

@@ -43,18 +43,18 @@ export function Header() {
           onClick={() => setOpen(false)}
         >
           <img src={logo} alt="" width={44} height={44} className="size-11" />
-          <span className="font-display text-2xl leading-none font-extrabold uppercase italic">
+          <span className="font-display text-2xl leading-none font-extrabold whitespace-nowrap uppercase italic">
             Dobrze <span className="text-accent">Tniemy</span>
           </span>
         </a>
 
         <nav aria-label="Główna" className="hidden nav:block">
-          <ul className="flex gap-7">
+          <ul className="flex gap-5 xl:gap-7">
             {nav.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="font-display text-lg font-semibold tracking-[0.06em] text-muted uppercase no-underline transition-colors hover:text-fg"
+                  className="font-display text-lg font-semibold tracking-[0.06em] whitespace-nowrap text-muted uppercase no-underline transition-colors hover:text-fg"
                 >
                   {item.label}
                 </a>
@@ -65,7 +65,7 @@ export function Header() {
 
         <a
           href={business.phone.href}
-          className={`${primaryButton} min-h-11 px-4 text-lg max-nav:hidden`}
+          className={`${primaryButton} min-h-11 px-4 text-lg whitespace-nowrap max-nav:hidden`}
         >
           <PhoneIcon />
           {business.phone.display}

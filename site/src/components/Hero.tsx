@@ -1,6 +1,7 @@
-import { motion, type Transition } from 'motion/react'
+import { AnimatePresence, motion, useReducedMotion, type Transition } from 'motion/react'
+import { useEffect, useState } from 'react'
 import { business, hero } from '../content/site'
-import { CheckIcon, PhoneIcon } from './ui/icons'
+import { PhoneIcon } from './ui/icons'
 import { Picture } from './ui/Picture'
 import { ghostButton, primaryButton } from './ui/buttons'
 
@@ -46,9 +47,13 @@ export function Hero() {
             {business.tagline}
           </motion.p>
 
-          <motion.p className="max-w-[60ch] text-muted" {...fadeUp(0.45)}>
-            {hero.lede}
-          </motion.p>
+          <motion.div className="grid max-w-[60ch] gap-3" {...fadeUp(0.45)}>
+            <p className="text-muted">{hero.lede}</p>
+            <p className="font-medium text-soft">{hero.closing[0]}</p>
+            <p className="font-display text-[1.3rem] leading-tight font-bold uppercase italic">
+              {hero.closing[1]}
+            </p>
+          </motion.div>
 
           <motion.div className="flex flex-wrap gap-3" {...fadeUp(0.55)}>
             <a href={business.phone.href} className={primaryButton}>
@@ -59,15 +64,6 @@ export function Hero() {
               Zobacz usługi
             </a>
           </motion.div>
-
-          <motion.ul className="mt-1 flex flex-wrap gap-x-6 gap-y-2.5" {...fadeUp(0.65)}>
-            {hero.facts.map((fact) => (
-              <li key={fact} className="flex items-center gap-2.5 text-[0.98rem] font-medium">
-                <CheckIcon className="size-5.5 flex-none text-accent" />
-                {fact}
-              </li>
-            ))}
-          </motion.ul>
         </div>
 
         <div className="relative -order-1 -mr-[max(1rem,env(safe-area-inset-right,0px))] aspect-[4/4.2] max-w-screen md:order-0 md:mr-0 md:aspect-auto md:min-h-130 md:self-stretch">
@@ -95,18 +91,51 @@ export function Hero() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.2, delay: 0.4 }}
           />
-          <motion.div
-            aria-hidden="true"
-            className="absolute bottom-4.5 left-2 z-10 grid gap-0.5 rounded-lg bg-accent px-4.5 py-3.5 font-display leading-none text-bg uppercase italic shadow-[0_18px_40px_rgba(0,0,0,0.45)] md:bottom-8.5 md:-left-2"
-            initial={{ opacity: 0, scale: 0.6, rotate: -4 }}
-            animate={{ opacity: 1, scale: 1, rotate: -4 }}
-            transition={{ delay: 0.9, type: 'spring', stiffness: 260, damping: 14 }}
-          >
-            <b className="text-[1.9rem] font-black">{hero.badge.title}</b>
-            <small className="text-[0.95rem] font-bold tracking-[0.08em]">{hero.badge.note}</small>
-          </motion.div>
+          <SloganBadge slogans={hero.slogans} />
         </div>
       </div>
     </section>
+  )
+}
+
+function SloganBadge({ slogans }: { slogans: readonly string[] }) {
+  const [active, setActive] = useState(0)
+  const reduceMotion = useReducedMotion()
+
+  useEffect(() => {
+    if (reduceMotion || slogans.length < 2) return
+    const id = setInterval(() => setActive((i) => (i + 1) % slogans.length), 4000)
+    return () => clearInterval(id)
+  }, [reduceMotion, slogans.length])
+
+  return (
+    // will-change stops the rotated text from flickering while the slogans swap.
+    <motion.div
+      aria-hidden="true"
+      className="absolute bottom-4.5 left-2 z-10 rounded-lg bg-accent px-4.5 py-3.5 font-display text-[1.3rem] leading-[1.05] font-extrabold whitespace-pre-line text-bg uppercase italic shadow-[0_18px_40px_rgba(0,0,0,0.45)] will-change-transform md:bottom-8.5 md:-left-2 md:text-[1.6rem]"
+      initial={{ opacity: 0, scale: 0.6, rotate: -4 }}
+      animate={{ opacity: 1, scale: 1, rotate: -4 }}
+      transition={{ delay: 0.9, type: 'spring', stiffness: 260, damping: 14 }}
+    >
+      <div className="grid items-center overflow-hidden">
+        {slogans.map((slogan) => (
+          <span key={slogan} className="invisible [grid-area:1/1]">
+            {slogan}
+          </span>
+        ))}
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.span
+            key={active}
+            className="[grid-area:1/1]"
+            initial={{ opacity: 0, y: '60%' }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: '-60%' }}
+            transition={{ duration: 0.3, ease }}
+          >
+            {slogans[active]}
+          </motion.span>
+        </AnimatePresence>
+      </div>
+    </motion.div>
   )
 }

@@ -1,5 +1,5 @@
 import logo from '../assets/brand/logo-white.svg'
-import { business } from '../content/site'
+import { addressLine, business } from '../content/site'
 
 const year = new Date().getFullYear()
 
@@ -13,6 +13,8 @@ export function Footer() {
         <img src={logo} alt="Logo Dobrze Tniemy" width={88} height={88} className="size-22" />
         <p className="text-[0.95rem] text-muted">
           <b className="font-semibold text-fg">{business.legalName}</b>
+          <br />
+          {addressLine}
           <br />
           NIP: {business.nip} · © {year} {business.brand}
         </p>

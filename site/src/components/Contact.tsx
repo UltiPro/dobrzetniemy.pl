@@ -1,11 +1,12 @@
 import { useState, type ComponentType, type SVGProps } from 'react'
 import contactBg from '../assets/photos/zrebka-tekstura.jpg?w=1200&format=webp'
-import { business, contact, socials, type SocialId } from '../content/site'
+import { addressLine, business, contact, socials, type SocialId } from '../content/site'
 import {
   ArrowIcon,
   FacebookIcon,
   InstagramIcon,
   MailIcon,
+  MapIcon,
   PhoneIcon,
   PinIcon,
   WhatsAppIcon,
@@ -18,6 +19,10 @@ const socialIcons: Record<SocialId, ComponentType<SVGProps<SVGSVGElement>>> = {
   instagram: InstagramIcon,
   whatsapp: WhatsAppIcon,
 }
+
+const visibleSocials = socials.filter((s) => !('hidden' in s && s.hidden))
+
+const columnTitle = 'mb-1 font-display text-[0.9rem] font-bold tracking-[0.2em] text-wood uppercase'
 
 export function Contact() {
   return (
@@ -54,15 +59,12 @@ export function Contact() {
               href={`mailto:${business.email}`}
               copy
             />
-            <ContactRow icon={PinIcon} label="Obszar" value={business.area} />
           </dl>
         </Reveal>
 
         <Reveal delay={0.1} className="grid gap-3">
-          <h3 className="mb-1 font-display text-[0.9rem] font-bold tracking-[0.2em] text-wood uppercase">
-            {contact.socialsTitle}
-          </h3>
-          {socials.map((s) => {
+          <h3 className={columnTitle}>{contact.socialsTitle}</h3>
+          {visibleSocials.map((s) => {
             const Icon = socialIcons[s.id]
             return (
               <a
@@ -83,6 +85,12 @@ export function Contact() {
               </a>
             )
           })}
+
+          <h3 className={`mt-7 ${columnTitle}`}>{contact.placeTitle}</h3>
+          <dl className="grid border-b border-line">
+            <ContactRow icon={PinIcon} label="Siedziba" value={addressLine} />
+            <ContactRow icon={MapIcon} label="Obszar" value={business.area} />
+          </dl>
         </Reveal>
       </div>
     </section>

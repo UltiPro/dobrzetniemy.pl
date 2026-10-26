@@ -3,6 +3,7 @@ import { CheckIcon } from './ui/icons'
 import { Picture } from './ui/Picture'
 import { Reveal } from './ui/Reveal'
 import { SectionHeading } from './ui/SectionHeading'
+import { Stamp } from './ui/Stamp'
 
 export function About() {
   return (
@@ -12,8 +13,11 @@ export function About() {
       aria-labelledby="o-nas-title"
       className="py-[clamp(4.5rem,10vw,8rem)]"
     >
-      <div className="mx-auto grid max-w-content items-center gap-[clamp(2.25rem,6vw,5rem)] gutter md:grid-cols-2">
-        <Reveal as="figure">
+      <div className="mx-auto grid max-w-content items-start gap-[clamp(2.25rem,6vw,5rem)] gutter md:grid-cols-2">
+        <Reveal as="figure" className="relative md:sticky md:top-28">
+          <Stamp rotate={2} className="top-4 right-4">
+            {about.slogan}
+          </Stamp>
           <Picture
             photo={about.photo}
             alt={about.photoAlt}
@@ -30,6 +34,9 @@ export function About() {
               {p}
             </p>
           ))}
+          <p className="font-display text-[1.3rem] font-bold text-accent uppercase italic">
+            {about.teamNote}
+          </p>
           <div className="mt-2 border-t border-line pt-5.5">
             <h3 className="mb-4 font-display text-[0.9rem] font-bold tracking-[0.2em] text-wood uppercase">
               {about.gearTitle}

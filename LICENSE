@@ -1,0 +1,17 @@
+Copyright (c) 2026 Patryk 'UltiPro' Wójtowicz. All rights reserved.
+
+This repository is published for viewing only. No license is granted to copy,
+modify, distribute or use any part of it, in whole or in part, in other
+projects without prior written permission from the copyright holder.
+
+This covers the source code, the design and layout of the website and the
+business card, and their build output.
+
+The name "Dobrze Tniemy", the DT logo and its variants, the photographs and
+video clips, and the written copy belong to Usługi Pilarskie i Leśne
+Damian Treder and are used here with permission. They are not licensed for
+any other use either.
+
+The voivodeship outlines in site/src/data/poland.ts are derived from
+https://github.com/ppatrzyk/polska-geojson and remain under that project's
+terms.

@@ -8,6 +8,7 @@ import { PauseIcon, PlayIcon } from './ui/icons'
 import { Picture } from './ui/Picture'
 import { Reveal } from './ui/Reveal'
 import { SectionHeading } from './ui/SectionHeading'
+import { Stamp } from './ui/Stamp'
 
 type Filter = 'all' | CategoryId
 type PhotoItem = Extract<GalleryItem, { kind: 'photo' }>
@@ -93,6 +94,11 @@ export function Gallery() {
                   </button>
                 ) : (
                   <GalleryVideo video={item.video} label={item.caption} />
+                )}
+                {item.kind === 'photo' && item.slogan && (
+                  <Stamp size="sm" rotate={-3} className="top-3 left-3 max-sm:hidden">
+                    {item.slogan}
+                  </Stamp>
                 )}
                 <figcaption className="pointer-events-none absolute inset-x-0 bottom-0 flex items-end justify-between gap-3 bg-linear-to-t from-bg/90 to-transparent px-3 pt-9 pb-3 text-[0.9rem] font-medium sm:px-4 sm:text-[0.95rem]">
                   <span>{item.caption}</span>

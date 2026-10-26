@@ -3,6 +3,7 @@ import { CheckIcon } from './ui/icons'
 import { Picture } from './ui/Picture'
 import { Reveal } from './ui/Reveal'
 import { SectionHeading } from './ui/SectionHeading'
+import { Stamp } from './ui/Stamp'
 
 export function Services() {
   return (
@@ -36,6 +37,11 @@ export function Services() {
                   className="size-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-b from-transparent from-40% to-raise" />
+                {category.slogan && (
+                  <Stamp rotate={i % 2 ? 2 : -3} className="top-4 left-4">
+                    {category.slogan}
+                  </Stamp>
+                )}
                 <div className="absolute inset-x-0 bottom-0 grid gap-1 px-6 pb-4">
                   <span className="font-display text-sm font-bold tracking-[0.16em] text-accent uppercase">
                     {category.lead}
