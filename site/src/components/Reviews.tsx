@@ -47,7 +47,7 @@ export function Reviews() {
           </div>
         </Reveal>
 
-        <ul className="flex snap-x snap-mandatory scroll-px-4 gap-4 overflow-x-auto pb-2 max-md:-mx-4 max-md:px-4 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0">
+        <ul className="flex snap-x snap-mandatory scroll-px-4 scrollbar-brand gap-4 overflow-x-auto overflow-y-hidden pb-4 max-md:-mx-4 max-md:px-4 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:pb-0">
           {reviews.items.map((review, i) => (
             <Reveal
               as="li"

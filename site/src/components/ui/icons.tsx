@@ -55,8 +55,13 @@ export function PinIcon(props: IconProps) {
 
 export function FacebookIcon(props: IconProps) {
   return (
-    <svg viewBox="0 0 24 24" fill="currentColor" {...base} {...props}>
-      <path d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.25-1.45 1.5-1.45h1.6V4.47A21 21 0 0 0 14.3 4.3c-2.3 0-3.85 1.4-3.85 3.97v2.23H7.8v3h2.65V21z" />
+    <svg viewBox="0 0 24 24" {...base} {...props}>
+      <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.8" />
+      <path
+        fill="currentColor"
+        transform="translate(3.8 5.9) scale(.72)"
+        d="M13.5 21v-7.5h2.6l.4-3h-3V8.6c0-.87.25-1.45 1.5-1.45h1.6V4.47A21 21 0 0 0 14.3 4.3c-2.3 0-3.85 1.4-3.85 3.97v2.23H7.8v3h2.65V21z"
+      />
     </svg>
   )
 }

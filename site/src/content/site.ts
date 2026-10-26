@@ -10,6 +10,8 @@ export const business = {
   owner: 'Damian Treder',
   nip: '848-189-35-52',
   address: { street: 'Przykopka 18', postalCode: '19-311', city: 'Przykopka' },
+  // The bare address lands on the wrong spot in Maps, the name plus Google's "Ełk" address opens the listing.
+  mapsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Dobrze Tniemy, Przykopka 18, 19-311 Ełk')}`,
   tagline: 'Precyzja na każdej wysokości.',
   phone: { display: '723 277 958', href: 'tel:+48723277958' },
   email: 'info.damiantreder@gmail.com',
@@ -29,9 +31,7 @@ export const socials = [
     id: 'instagram',
     label: 'Instagram',
     note: 'Na bieżąco z pracy',
-    href: 'https://www.instagram.com/',
-    // Hidden until the client has a profile: set href and drop this flag.
-    hidden: true,
+    href: 'https://www.instagram.com/dobrze.tniemy',
   },
   {
     id: 'whatsapp',
@@ -474,5 +474,4 @@ export const contact = {
   title: ['Zadzwoń,', 'wycenimy'],
   lede: 'Najszybciej przez telefon. Możesz też wysłać zdjęcia drzewa lub działki na WhatsAppie, a oddzwonimy z wyceną.',
   socialsTitle: 'Znajdziesz nas też tutaj',
-  placeTitle: 'Siedziba i obszar działania',
 }

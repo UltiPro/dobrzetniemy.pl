@@ -20,10 +20,6 @@ const socialIcons: Record<SocialId, ComponentType<SVGProps<SVGSVGElement>>> = {
   whatsapp: WhatsAppIcon,
 }
 
-const visibleSocials = socials.filter((s) => !('hidden' in s && s.hidden))
-
-const columnTitle = 'mb-1 font-display text-[0.9rem] font-bold tracking-[0.2em] text-wood uppercase'
-
 export function Contact() {
   return (
     <section
@@ -59,12 +55,21 @@ export function Contact() {
               href={`mailto:${business.email}`}
               copy
             />
+            <ContactRow
+              icon={PinIcon}
+              label="Siedziba"
+              value={addressLine}
+              action={{ href: business.mapsUrl, label: 'Prowadź' }}
+            />
+            <ContactRow icon={MapIcon} label="Obszar" value={business.area} />
           </dl>
         </Reveal>
 
         <Reveal delay={0.1} className="grid gap-3">
-          <h3 className={columnTitle}>{contact.socialsTitle}</h3>
-          {visibleSocials.map((s) => {
+          <h3 className="mb-1 font-display text-[0.9rem] font-bold tracking-[0.2em] text-wood uppercase">
+            {contact.socialsTitle}
+          </h3>
+          {socials.map((s) => {
             const Icon = socialIcons[s.id]
             return (
               <a
@@ -85,17 +90,14 @@ export function Contact() {
               </a>
             )
           })}
-
-          <h3 className={`mt-7 ${columnTitle}`}>{contact.placeTitle}</h3>
-          <dl className="grid border-b border-line">
-            <ContactRow icon={PinIcon} label="Siedziba" value={addressLine} />
-            <ContactRow icon={MapIcon} label="Obszar" value={business.area} />
-          </dl>
         </Reveal>
       </div>
     </section>
   )
 }
+
+const rowButton =
+  'inline-flex min-h-9.5 items-center rounded-md border-[1.5px] px-3.5 font-display text-[0.92rem] font-bold tracking-[0.08em] uppercase transition-colors'
 
 type ContactRowProps = {
   icon: ComponentType<SVGProps<SVGSVGElement>>
@@ -103,9 +105,10 @@ type ContactRowProps = {
   value: string
   href?: string
   copy?: boolean
+  action?: { href: string; label: string }
 }
 
-function ContactRow({ icon: Icon, label, value, href, copy }: ContactRowProps) {
+function ContactRow({ icon: Icon, label, value, href, copy, action }: ContactRowProps) {
   const [user, domain] = value.split('@')
   const text = domain ? (
     <>
@@ -135,7 +138,20 @@ function ContactRow({ icon: Icon, label, value, href, copy }: ContactRowProps) {
           )}
         </dd>
       </div>
-      {copy ? <CopyButton value={value} label={label} /> : <span />}
+      {copy ? (
+        <CopyButton value={value} label={label} />
+      ) : action ? (
+        <a
+          href={action.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className={`${rowButton} border-line text-fg no-underline hover:border-accent hover:text-accent`}
+        >
+          {action.label}
+        </a>
+      ) : (
+        <span />
+      )}
     </div>
   )
 }
@@ -156,7 +172,7 @@ function CopyButton({ value, label }: { value: string; label: string }) {
       type="button"
       onClick={copy}
       aria-label={`Kopiuj: ${label}`}
-      className={`min-h-9.5 rounded-md border-[1.5px] px-3.5 font-display text-[0.92rem] font-bold tracking-[0.08em] uppercase transition-colors ${
+      className={`${rowButton} ${
         state === 'done'
           ? 'border-accent bg-accent text-bg'
           : 'border-line text-fg hover:border-accent hover:text-accent'

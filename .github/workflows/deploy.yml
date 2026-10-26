@@ -3,7 +3,9 @@ name: Build and deploy
 on:
   push:
     branches: [main]
+    paths: ["site/**", ".github/workflows/deploy.yml"]
   pull_request:
+    paths: ["site/**", ".github/workflows/deploy.yml"]
   workflow_dispatch:
 
 permissions:

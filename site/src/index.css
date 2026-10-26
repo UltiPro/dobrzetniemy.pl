@@ -31,6 +31,7 @@
   --ease-out-soft: cubic-bezier(0.2, 0.7, 0.1, 1);
 
   --animate-marquee: marquee 46s linear infinite;
+
   @keyframes marquee {
     to {
       transform: translateX(-50%);
@@ -57,6 +58,7 @@
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--color-accent);
+
   &::before {
     content: '';
     width: 1.75rem;
@@ -68,10 +70,16 @@
 @utility gutter {
   padding-left: max(1rem, env(safe-area-inset-left, 0px));
   padding-right: max(1rem, env(safe-area-inset-right, 0px));
+
   @variant md {
     padding-left: max(2rem, env(safe-area-inset-left, 0px));
     padding-right: max(2rem, env(safe-area-inset-right, 0px));
   }
+}
+
+@utility scrollbar-brand {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent) var(--color-line);
 }
 
 @layer base {
@@ -80,16 +88,20 @@
     scroll-padding-top: 5rem;
     color-scheme: dark;
   }
+
   body {
     @apply bg-bg font-sans text-[1.0625rem] leading-relaxed text-fg antialiased;
     overflow-x: clip;
   }
+
   ::selection {
     @apply bg-accent text-bg;
   }
+
   :focus-visible {
     @apply rounded-sm outline-2 outline-offset-3 outline-accent;
   }
+
   @variant motion-reduce {
     html {
       scroll-behavior: auto;
