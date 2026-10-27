@@ -147,3 +147,6 @@ vite.config.ts.timestamp-*
 
 # Turbo Repo
 .turbo
+
+# Business card print files are committed on purpose (overrides `dist` above)
+!business-card/dist/

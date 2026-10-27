@@ -163,7 +163,7 @@ function CopyButton({ value, label }: { value: string; label: string }) {
       await navigator.clipboard.writeText(value)
       setState('done')
     } catch {
-      setState('failed')
+      setState(copyWithSelection(value) ? 'done' : 'failed')
     }
     setTimeout(() => setState('idle'), 1800)
   }
@@ -183,4 +183,18 @@ function CopyButton({ value, label }: { value: string; label: string }) {
       </span>
     </button>
   )
+}
+
+// Fallback for in-app browsers (Messenger, Instagram) that block the Clipboard API.
+function copyWithSelection(text: string) {
+  const area = document.createElement('textarea')
+  area.value = text
+  area.readOnly = true
+  area.style.cssText = 'position:fixed;top:0;opacity:0;font-size:16px'
+  document.body.append(area)
+  area.select()
+  area.setSelectionRange(0, text.length)
+  const copied = document.execCommand('copy')
+  area.remove()
+  return copied
 }

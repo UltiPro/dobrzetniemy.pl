@@ -1,7 +1,7 @@
 import { motion } from 'motion/react'
 import { useEffect, useRef, useState } from 'react'
 import { gallery, services, type CategoryId, type GalleryItem } from '../content/site'
-import { getVideo } from '../lib/media'
+import { coverScale, getVideo, type PhotoKey } from '../lib/media'
 import { Lightbox } from './Lightbox'
 import { ghostButton } from './ui/buttons'
 import { PauseIcon, PlayIcon } from './ui/icons'
@@ -20,6 +20,11 @@ const filters: { id: Filter; label: string }[] = [
 const PAGE_SIZE = 9
 
 const categoryLabel = Object.fromEntries(services.categories.map((c) => [c.id, c.title]))
+
+const tileSizes = (photo: PhotoKey) => {
+  const scale = coverScale(photo, 4 / 5)
+  return `(min-width: 64rem) ${Math.round(380 * scale)}px, ${Math.round(50 * scale)}vw`
+}
 
 export function Gallery() {
   const [filter, setFilter] = useState<Filter>('all')
@@ -88,7 +93,7 @@ export function Gallery() {
                       photo={item.photo}
                       alt={item.alt}
                       style={{ objectPosition: item.position }}
-                      sizes="(min-width: 64rem) 380px, 50vw"
+                      sizes={tileSizes(item.photo)}
                       className="size-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-[1.04]"
                     />
                   </button>
@@ -147,7 +152,11 @@ function GalleryVideo({ video, label }: { video: string; label: string }) {
     const el = ref.current
     if (!el) return
     const io = new IntersectionObserver(([entry]) => {
-      if (entry.isIntersecting && !paused) el.play().catch(() => {})
+      if (entry.isIntersecting && !paused)
+        el.play().catch((error: unknown) => {
+          // Autoplay blocked (some in-app browsers): show the play button instead of a frozen frame.
+          if (error instanceof DOMException && error.name === 'NotAllowedError') setPaused(true)
+        })
       else el.pause()
     })
     io.observe(el)

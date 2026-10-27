@@ -21,8 +21,9 @@ export function About() {
           <Picture
             photo={about.photo}
             alt={about.photoAlt}
+            style={{ objectPosition: about.photoPosition }}
             sizes="(min-width: 48rem) 50vw, 100vw"
-            className="aspect-[5/4.2] w-full rounded-[10px] object-cover"
+            className="aspect-4/5 w-full rounded-[10px] object-cover md:max-h-[calc(100svh-11rem)]"
           />
           <figcaption className="mt-3 text-[0.9rem] text-muted">{about.photoCaption}</figcaption>
         </Reveal>

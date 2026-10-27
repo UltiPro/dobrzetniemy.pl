@@ -1,4 +1,5 @@
 import { services } from '../content/site'
+import { coverScale } from '../lib/media'
 import { CheckIcon } from './ui/icons'
 import { Picture } from './ui/Picture'
 import { Reveal } from './ui/Reveal'
@@ -28,20 +29,17 @@ export function Services() {
               className="flex flex-col overflow-hidden rounded-[10px] border border-line bg-raise"
               aria-labelledby={`kat-${category.id}`}
             >
-              <div className="group relative aspect-16/10 overflow-hidden lg:aspect-[4/3.4]">
+              <div className="group relative aspect-4/3 overflow-hidden sm:aspect-16/10 lg:aspect-[4/3.4]">
                 <Picture
                   photo={category.photo}
                   alt={category.photoAlt}
                   style={{ objectPosition: category.photoPosition }}
-                  sizes="(min-width: 64rem) 33vw, 100vw"
+                  sizes={`(min-width: 64rem) ${Math.round(33 * coverScale(category.photo, 4 / 3.4))}vw, ${Math.round(100 * coverScale(category.photo, 4 / 3))}vw`}
                   className="size-full object-cover transition-transform duration-700 ease-out-soft group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-linear-to-b from-transparent from-40% to-raise" />
-                {category.slogan && (
-                  <Stamp rotate={i % 2 ? 2 : -3} className="top-4 left-4">
-                    {category.slogan}
-                  </Stamp>
-                )}
+                {/* Right side: the subjects of these photos sit on the left. */}
+                {category.slogan && <Stamp className="top-4 right-4">{category.slogan}</Stamp>}
                 <div className="absolute inset-x-0 bottom-0 grid gap-1 px-6 pb-4">
                   <span className="font-display text-sm font-bold tracking-[0.16em] text-accent uppercase">
                     {category.lead}

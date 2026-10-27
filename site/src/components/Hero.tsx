@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useReducedMotion, type Transition } from 'motion/react'
 import { useEffect, useState } from 'react'
 import { business, hero } from '../content/site'
-import { PhoneIcon } from './ui/icons'
+import { CheckIcon, PhoneIcon } from './ui/icons'
 import { Picture } from './ui/Picture'
 import { ghostButton, primaryButton } from './ui/buttons'
 
@@ -46,6 +46,15 @@ export function Hero() {
           >
             {business.tagline}
           </motion.p>
+
+          <motion.ul className="grid gap-x-6 gap-y-2.5 xl:grid-cols-[auto_auto]" {...fadeUp(0.4)}>
+            {hero.highlights.map((item) => (
+              <li key={item} className="flex items-center gap-2.5 text-[1.02rem] font-medium">
+                <CheckIcon className="size-5.5 flex-none text-accent" />
+                {item}
+              </li>
+            ))}
+          </motion.ul>
 
           <motion.div className="grid max-w-[60ch] gap-3" {...fadeUp(0.45)}>
             <p className="text-muted">{hero.lede}</p>
