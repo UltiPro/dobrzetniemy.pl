@@ -10,7 +10,7 @@ export function Footer() {
       className="border-t border-line bg-bg pt-12 pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] max-nav:pb-28"
     >
       <div className="mx-auto grid max-w-content items-center gap-x-10 gap-y-6 gutter sm:grid-cols-[auto_minmax(0,1fr)_auto]">
-        <img src={logo} alt="Logo Dobrze Tniemy" width={88} height={88} className="size-22" />
+        <img src={logo} alt="" width={88} height={88} className="size-22" />
         <p className="text-[0.95rem] text-muted">
           <b className="font-semibold text-fg">{business.legalName}</b>
           <br />

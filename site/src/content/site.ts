@@ -14,7 +14,7 @@ export const business = {
   mapsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Dobrze Tniemy, Przykopka 18, 19-311 Ełk')}`,
   tagline: 'Precyzja na każdej wysokości.',
   phone: { display: '723 277 958', href: 'tel:+48723277958' },
-  email: 'info.damiantreder@gmail.com',
+  email: 'kontakt@dobrzetniemy.pl',
   area: 'Warmińsko-Mazurskie, Podlaskie',
 } as const
 
@@ -53,7 +53,7 @@ export const nav = [
 ] as const
 
 export const hero = {
-  eyebrow: `Usługi pilarskie i leśne · ${business.owner}`,
+  eyebrow: ['Usługi pilarskie i leśne', business.owner],
   lede: 'Nie ma dla nas znaczenia, czy drzewo stoi na otwartej działce, tuż przy domu, czy w pobliżu linii energetycznej. Każde zlecenie zaczynamy od oceny sytuacji oraz doboru odpowiedniego rozwiązania i sprzętu. Działamy z głową i dbamy o to, żeby praca była wykonana fachowo, ponieważ wiemy, że liczy się nie tylko efekt, ale też bezpieczeństwo, porządek i terminowa realizacja.',
   closing: [
     'Ty mówisz, czego potrzebujesz — my znajdujemy rozwiązanie i robimy swoje.',

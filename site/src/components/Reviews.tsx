@@ -25,7 +25,7 @@ export function Reviews() {
       <div className="mx-auto max-w-content gutter">
         <Reveal className="mb-[clamp(2.25rem,5vw,3.5rem)] grid items-end gap-x-12 gap-y-6 md:grid-cols-2">
           <SectionHeading id="opinie-title" eyebrow={reviews.eyebrow} title={reviews.title} />
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-4 md:justify-end">
+          <div className="flex flex-wrap items-center gap-x-3 gap-y-4 max-md:justify-between md:justify-end md:gap-x-6">
             <p className="flex items-center gap-3">
               <span className="font-display text-[2.8rem] leading-none font-black italic">
                 {reviews.rating}
@@ -39,9 +39,12 @@ export function Reviews() {
               href={reviews.href}
               target="_blank"
               rel="noopener noreferrer"
-              className={ghostButton}
+              aria-label={`Wszystkie opinie w ${reviews.source}`}
+              className={`${ghostButton} max-md:min-h-11 max-md:border-0 max-md:px-0 max-md:text-lg max-md:text-accent`}
             >
-              Wszystkie opinie
+              <span>
+                Wszystkie<span className="max-md:hidden"> opinie</span>
+              </span>
               <ArrowIcon />
             </a>
           </div>

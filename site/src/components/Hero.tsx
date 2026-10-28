@@ -22,7 +22,11 @@ export function Hero() {
       <div className="mx-auto grid max-w-content items-center gap-10 pt-6 gutter pb-14 md:grid-cols-[1.05fr_0.95fr] md:pt-14 md:pb-18">
         <div className="relative z-10 grid justify-items-start gap-6">
           <motion.span className="eyebrow" {...fadeUp(0)}>
-            {hero.eyebrow}
+            <span>
+              {hero.eyebrow[0]}
+              <span className="max-lg:hidden"> · </span>
+              <span className="max-lg:block">{hero.eyebrow[1]}</span>
+            </span>
           </motion.span>
 
           <h1 id="hero-title" className="display text-hero">
@@ -64,10 +68,16 @@ export function Hero() {
             </p>
           </motion.div>
 
-          <motion.div className="flex flex-wrap gap-3" {...fadeUp(0.55)}>
+          <motion.div
+            className="flex flex-wrap gap-3 max-sm:justify-self-stretch max-sm:*:grow max-sm:*:justify-center"
+            {...fadeUp(0.55)}
+          >
             <a href={business.phone.href} className={primaryButton}>
               <PhoneIcon />
-              Zadzwoń: {business.phone.display}
+              <span>
+                <span className="max-sm:sr-only">Zadzwoń: </span>
+                {business.phone.display}
+              </span>
             </a>
             <a href="#uslugi" className={ghostButton}>
               Zobacz usługi

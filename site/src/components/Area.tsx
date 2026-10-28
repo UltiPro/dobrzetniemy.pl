@@ -23,10 +23,7 @@ export function Area() {
           <p className="max-w-[60ch] text-muted">{area.lede}</p>
           <ul className="grid">
             {area.regions.map((r) => (
-              <li
-                key={r.name}
-                className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 border-b border-line py-3.5"
-              >
+              <li key={r.name} className="grid gap-1 border-b border-line py-3.5">
                 <b className="display text-[1.7rem] leading-none">{r.name}</b>
                 <span className="text-[0.95rem] text-muted">{r.towns}</span>
               </li>

@@ -17,7 +17,8 @@ const filters: { id: Filter; label: string }[] = [
   { id: 'all', label: 'Wszystkie' },
   ...services.categories.map((c) => ({ id: c.id, label: c.title })),
 ]
-const PAGE_SIZE = 9
+// Fills whole rows in both the 2- and 3-column grid.
+const PAGE_SIZE = 12
 
 const categoryLabel = Object.fromEntries(services.categories.map((c) => [c.id, c.title]))
 
