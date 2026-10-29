@@ -1,0 +1,20 @@
+{
+  "name": "dobrzetniemy-business-card",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Two-sided 90x50 mm business card for Dobrze Tniemy, rendered to a print PDF.",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
+  },
+  "dependencies": {
+    "@fontsource/barlow": "^5.3.0",
+    "@fontsource/barlow-condensed": "^5.3.0",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "prettier": "^3.9.10"
+  }
+}

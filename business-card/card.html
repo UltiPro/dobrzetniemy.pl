@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Wizytówka Dobrze Tniemy</title>
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow/500.css" />
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow/600.css" />
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow-condensed/700.css" />
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow-condensed/700-italic.css" />
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow-condensed/800-italic.css" />
+    <style>
+      :root {
+        --bg: #0a0f0b;
+        /* line and muted are a step lighter than on the site, so they stay visible in print. */
+        --line: #2a3b2d;
+        --fg: #eef1e8;
+        --muted: #a9b6aa;
+        --accent: #8cc63f;
+        --bleed: 2mm;
+        --safe: calc(var(--bleed) + 4mm);
+      }
+      @page {
+        /* ~94 x 54 mm. Chromium quantises the PDF page size: 94mm comes out as 93.8 mm, while
+           267pt gives 94.2 x 54.0 mm, a hair of extra bleed rather than too little. */
+        size: 267pt 153.07pt;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        background: #555;
+        print-color-adjust: exact;
+      }
+      @media print {
+        /* The page is ~0.2 mm wider than the card. Keep that sliver of bleed dark. */
+        html,
+        body {
+          background: var(--bg);
+        }
+      }
+      .card {
+        position: relative;
+        width: calc(90mm + 2 * var(--bleed));
+        height: calc(50mm + 2 * var(--bleed));
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--fg);
+        font-family: 'Barlow', sans-serif;
+      }
+      .front {
+        break-after: page;
+      }
+      .display {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-style: italic;
+        font-weight: 800;
+        text-transform: uppercase;
+        line-height: 0.9;
+        margin: 0;
+      }
+      .acc {
+        color: var(--accent);
+      }
+      .check {
+        width: 3.2mm;
+        height: 3.2mm;
+        flex: none;
+        color: var(--accent);
+      }
+
+      .front .photo,
+      .front .arc {
+        position: absolute;
+        top: calc(-1 * var(--bleed));
+        bottom: calc(-1 * var(--bleed));
+        right: 0;
+        border-radius: 20mm 0 0 20mm / 50% 0 0 50%;
+      }
+      .front .photo {
+        left: 47mm;
+        overflow: hidden;
+      }
+      .front .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 48% 22%;
+      }
+      .front .arc {
+        left: 45.4mm;
+        top: calc(-1 * var(--bleed) - 1mm);
+        bottom: calc(-1 * var(--bleed) - 1mm);
+        border: 0.45mm solid var(--accent);
+        border-right: 0;
+      }
+      .front .copy {
+        position: absolute;
+        left: var(--safe);
+        top: var(--safe);
+        bottom: var(--safe);
+        width: 40mm;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .front .logo {
+        width: 12mm;
+        height: 12mm;
+      }
+      .front h1 {
+        font-size: 10.2mm;
+      }
+      .front .tagline {
+        margin: 1.4mm 0 0;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-style: italic;
+        font-weight: 700;
+        font-size: 3.15mm;
+        color: var(--accent);
+      }
+      .front .motto {
+        position: absolute;
+        right: 6.5mm;
+        bottom: 7.2mm;
+        padding: 1.3mm 2.2mm 1.1mm;
+        border-radius: 1mm;
+        background: var(--accent);
+        color: var(--bg);
+        font-size: 3.4mm;
+        transform: rotate(-4deg);
+      }
+
+      .back .inner {
+        position: absolute;
+        inset: var(--safe);
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 2mm;
+      }
+      .eyebrow {
+        display: flex;
+        align-items: center;
+        gap: 2mm;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        font-size: 2.3mm;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--fg);
+      }
+      .eyebrow::before,
+      .eyebrow::after {
+        content: '';
+        flex: 1;
+        height: 0.3mm;
+        background: var(--accent);
+      }
+      .services {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.3mm 3mm;
+        margin: 2mm 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .services li {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+        font-weight: 500;
+        font-size: 2.65mm;
+        line-height: 1;
+      }
+      .contact {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: end;
+        gap: 3mm;
+        border-top: 0.25mm solid var(--line);
+        padding-top: 1.8mm;
+      }
+      .name {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        font-size: 2.4mm;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .phone {
+        display: flex;
+        align-items: center;
+        gap: 1.8mm;
+        font-size: 6.6mm;
+        margin: 0.8mm 0 1.6mm;
+      }
+      .phone svg {
+        width: 4.4mm;
+        height: 4.4mm;
+        color: var(--accent);
+      }
+      .rows {
+        display: grid;
+        gap: 1mm;
+        font-size: 2.45mm;
+        font-weight: 500;
+      }
+      .rows div {
+        display: flex;
+        align-items: center;
+        gap: 1.6mm;
+      }
+      .rows svg {
+        width: 2.8mm;
+        height: 2.8mm;
+        flex: none;
+        color: var(--accent);
+      }
+      .qr {
+        display: grid;
+        justify-items: center;
+        gap: 0.8mm;
+      }
+      .qr .code {
+        width: 17mm;
+        height: 17mm;
+        padding: 1.5mm;
+        border-radius: 1mm;
+        background: #fff;
+      }
+      .qr .code svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+      .qr span {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        font-size: 2mm;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      body.preview {
+        display: flex;
+        gap: 8mm;
+        padding: 6mm;
+        background: #d9dcd5;
+      }
+      body.preview .card {
+        clip-path: inset(var(--bleed) round 1.2mm);
+      }
+      /* ?og: the trimmed front filling the site's 1200 x 630 link preview. The card is 1.8:1 and
+         the preview 1.9:1, so the zoom fits the width and ~5px (card scale) is cropped top and bottom. */
+      body.og {
+        overflow: hidden;
+        background: var(--bg);
+      }
+      body.og .back {
+        display: none;
+      }
+      body.og .front {
+        zoom: 3.5278;
+        margin: calc(-1 * var(--bleed) - 5.2px) calc(-1 * var(--bleed));
+      }
+    </style>
+  </head>
+  <body>
+    <section class="card front" aria-label="Przód">
+      <div class="photo"><img src="../site/src/assets/photos/hero-wspinaczka.jpg" alt="" /></div>
+      <div class="arc"></div>
+      <div class="copy">
+        <svg class="logo" data-inline="../brand/logo-white.svg"></svg>
+        <div>
+          <h1 class="display">Dobrze<br /><span class="acc">tniemy</span></h1>
+          <p class="tagline">Precyzja na każdej wysokości.</p>
+        </div>
+      </div>
+      <p class="display motto">Fachowo od korony<br />po korzenie.</p>
+    </section>
+
+    <section class="card back" aria-label="Tył">
+      <div class="inner">
+        <div>
+          <div class="eyebrow">Zakres usług</div>
+          <ul class="services">
+            <li><svg class="check" data-use="check"></svg>Wycinka drzew trudnych</li>
+            <li><svg class="check" data-use="check"></svg>Frezowanie pni</li>
+            <li><svg class="check" data-use="check"></svg>Pielęgnacja koron</li>
+            <li><svg class="check" data-use="check"></svg>Zrębkowanie gałęzi</li>
+            <li><svg class="check" data-use="check"></svg>Mulczowanie terenu</li>
+            <li><svg class="check" data-use="check"></svg>Sprzedaż drewna i zrębki</li>
+          </ul>
+        </div>
+        <div class="contact">
+          <div>
+            <div class="name">Arborysta Damian Treder</div>
+            <div class="display phone"><svg data-use="phone"></svg>723 277 958</div>
+            <div class="rows">
+              <div><svg data-use="mail"></svg>kontakt@dobrzetniemy.pl</div>
+              <div><svg data-use="pin"></svg>Warmińsko-Mazurskie, Podlaskie</div>
+            </div>
+          </div>
+          <div class="qr">
+            <div class="code" data-inline="dist/qr.svg"></div>
+            <span>dobrzetniemy.pl</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <svg width="0" height="0" style="position: absolute">
+      <symbol id="check" viewBox="0 0 28 28" fill="none" stroke="currentColor">
+        <rect x="2.5" y="6.5" width="17" height="17" rx="3.5" stroke-width="2.4" />
+        <path
+          d="M7 14.5l4.5 4.5L25 4"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </symbol>
+      <symbol id="phone" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"
+        />
+      </symbol>
+      <symbol id="mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2.5" y="5" width="19" height="14" rx="2" />
+        <path d="M3 6.5l9 6.5 9-6.5" stroke-linejoin="round" />
+      </symbol>
+      <symbol id="pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M12 21.5s-7-6.1-7-11.5a7 7 0 0 1 14 0c0 5.4-7 11.5-7 11.5z" />
+        <circle cx="12" cy="10" r="2.6" />
+      </symbol>
+    </svg>
+
+    <script>
+      const mode = location.search.slice(1)
+      if (mode) document.body.classList.add(mode)
+      document.querySelectorAll('[data-use]').forEach((el) => {
+        el.setAttribute('viewBox', document.getElementById(el.dataset.use).getAttribute('viewBox'))
+        el.innerHTML = `<use href="#${el.dataset.use}"/>`
+      })
+      document.querySelectorAll('[data-inline]').forEach(async (el) => {
+        const svg = await (await fetch(el.dataset.inline)).text()
+        const tpl = document.createElement('template')
+        tpl.innerHTML = svg.trim()
+        const node = tpl.content.firstElementChild
+        if (el.tagName.toLowerCase() === 'svg') {
+          node.setAttribute('class', el.getAttribute('class'))
+          el.replaceWith(node)
+        } else el.append(node)
+      })
+    </script>
+  </body>
+</html>
