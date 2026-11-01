@@ -441,14 +441,18 @@ export const about = {
 export const area = {
   eyebrow: 'Obszar działania',
   title: ['Warmia, Mazury', 'i Podlasie'],
-  lede: 'Dojeżdżamy na terenie dwóch województw. Przy większych zleceniach pojedziemy dalej, zadzwoń i zapytaj.',
+  lede: 'Bazę mamy pod Ełkiem, a dojeżdżamy na terenie dwóch województw. Przy większych zleceniach pojedziemy dalej, zadzwoń i zapytaj.',
   regions: [
     {
       name: 'Warmińsko-Mazurskie',
       mapName: 'warmińsko-mazurskie',
-      towns: 'Olsztyn, Elbląg, Ełk i okolice',
+      towns: 'Ełk, Olecko, Pisz, Giżycko, Biała Piska, Olsztyn, Elbląg i okolice',
     },
-    { name: 'Podlaskie', mapName: 'podlaskie', towns: 'Białystok, Suwałki, Łomża i okolice' },
+    {
+      name: 'Podlaskie',
+      mapName: 'podlaskie',
+      towns: 'Grajewo, Augustów, Rajgród, Suwałki, Białystok, Łomża i okolice',
+    },
   ],
   // Coordinates in the map's 600-wide viewBox (src/data/poland.ts).
   towns: [

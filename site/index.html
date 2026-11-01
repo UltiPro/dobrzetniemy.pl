@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <title>Dobrze Tniemy – wycinka drzew i usługi leśne | Warmia, Mazury, Podlasie</title>
+    <title>Dobrze Tniemy – wycinka drzew Ełk i okolice</title>
     <meta
       name="description"
-      content="Dobrze Tniemy – Damian Treder, tel. 723 277 958. Wycinka i pielęgnacja drzew, oczyszczanie działek, frezowanie pni i więcej. Warmia, Mazury, Podlasie."
+      content="Dobrze Tniemy – Damian Treder, tel. 723 277 958. Wycinka i pielęgnacja drzew, oczyszczanie działek, frezowanie pni. Ełk, Warmia, Mazury i Podlasie."
     />
     <meta name="author" content="Patryk 'UltiPro' Wójtowicz" />
     <meta name="theme-color" content="#0a0f0b" />
@@ -16,6 +16,17 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
+    <!-- Without JavaScript the prerendered content would stay in its hidden pre-animation state. -->
+    <noscript>
+      <style>
+        #root [style*='opacity:0'] {
+          opacity: 1 !important;
+        }
+        #root [style*='translateY('] {
+          transform: none !important;
+        }
+      </style>
+    </noscript>
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="pl_PL" />
@@ -67,6 +78,7 @@
         ],
         "founder": { "@type": "Person", "name": "Damian Treder" },
         "areaServed": [
+          { "@type": "City", "name": "Ełk" },
           { "@type": "AdministrativeArea", "name": "województwo warmińsko-mazurskie" },
           { "@type": "AdministrativeArea", "name": "województwo podlaskie" }
         ],
@@ -86,12 +98,6 @@
 
   <body>
     <div id="root"></div>
-    <noscript>
-      <p style="padding: 2rem; font-family: sans-serif">
-        Dobrze Tniemy – usługi pilarskie i leśne. Telefon: 723 277 958, e-mail:
-        kontakt@dobrzetniemy.pl
-      </p>
-    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

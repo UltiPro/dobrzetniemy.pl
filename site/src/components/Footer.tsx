@@ -11,7 +11,8 @@ export function Footer() {
     >
       <div className="mx-auto grid max-w-content items-center gap-x-10 gap-y-6 gutter sm:grid-cols-[auto_minmax(0,1fr)_auto]">
         <img src={logo} alt="" width={88} height={88} className="size-22" />
-        <p className="text-[0.95rem] text-muted">
+        {/* Shows the last deploy's year: the prerendered text wins over the visitor's clock. */}
+        <p className="text-[0.95rem] text-muted" suppressHydrationWarning>
           <b className="font-semibold text-fg">{business.legalName}</b>
           <br />
           {addressLine}

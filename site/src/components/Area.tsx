@@ -25,7 +25,7 @@ export function Area() {
             {area.regions.map((r) => (
               <li key={r.name} className="grid gap-1 border-b border-line py-3.5">
                 <b className="display text-[1.7rem] leading-none">{r.name}</b>
-                <span className="text-[0.95rem] text-muted">{r.towns}</span>
+                <span className="text-[0.95rem] text-pretty text-muted">{r.towns}</span>
               </li>
             ))}
           </ul>

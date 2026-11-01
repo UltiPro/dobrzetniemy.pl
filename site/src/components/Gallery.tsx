@@ -1,5 +1,5 @@
 import { motion } from 'motion/react'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useSyncExternalStore } from 'react'
 import { gallery, services, type CategoryId, type GalleryItem } from '../content/site'
 import { coverScale, getVideo, type PhotoKey } from '../lib/media'
 import { Lightbox } from './Lightbox'
@@ -140,13 +140,22 @@ export function Gallery() {
   )
 }
 
+const reducedMotion = '(prefers-reduced-motion: reduce)'
+const subscribeReducedMotion = (onChange: () => void) => {
+  const query = matchMedia(reducedMotion)
+  query.addEventListener('change', onChange)
+  return () => query.removeEventListener('change', onChange)
+}
+
 function GalleryVideo({ video, label }: { video: string; label: string }) {
   const ref = useRef<HTMLVideoElement>(null)
-  const [paused, setPaused] = useState(() =>
-    typeof window !== 'undefined'
-      ? window.matchMedia('(prefers-reduced-motion: reduce)').matches
-      : false,
+  const prefersStill = useSyncExternalStore(
+    subscribeReducedMotion,
+    () => matchMedia(reducedMotion).matches,
+    () => false,
   )
+  const [override, setPaused] = useState<boolean>()
+  const paused = override ?? prefersStill
   const { src, poster } = getVideo(video)
 
   useEffect(() => {
@@ -181,7 +190,7 @@ function GalleryVideo({ video, label }: { video: string; label: string }) {
       />
       <button
         type="button"
-        onClick={() => setPaused((p) => !p)}
+        onClick={() => setPaused(!paused)}
         className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-bg/75 py-1.5 pr-3 pl-2 text-[0.8rem] font-semibold tracking-wide backdrop-blur-sm"
         aria-label={paused ? `Odtwórz wideo: ${label}` : `Zatrzymaj wideo: ${label}`}
       >

@@ -1,5 +1,7 @@
 # Business card
 
+![Front and back of the business card](dist/preview.png)
+
 Two-sided card, **90 × 50 mm trim** with **2 mm bleed**. Text and the QR code stay at least 4 mm inside the trim. The design is in `card.html`, and `build.mjs` renders it with Chrome or Edge (or the browser set in `CHROME_PATH`):
 
 ```sh
