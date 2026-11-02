@@ -9,7 +9,7 @@ export const business = {
   legalName: 'Usługi Pilarskie i Leśne Damian Treder',
   owner: 'Damian Treder',
   nip: '848-189-35-52',
-  address: { street: 'Przykopka 18', postalCode: '19-311', city: 'Przykopka' },
+  address: { street: 'Przykopka 18', postalCode: '19-311', city: 'Ełk' },
   // The bare address lands on the wrong spot in Maps, the name plus Google's "Ełk" address opens the listing.
   mapsUrl: `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent('Dobrze Tniemy, Przykopka 18, 19-311 Ełk')}`,
   tagline: 'Precyzja na każdej wysokości.',
