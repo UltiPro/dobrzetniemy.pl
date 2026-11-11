@@ -16,12 +16,13 @@ One-page website and business card for **Dobrze Tniemy** (Usługi Pilarskie i Le
 - **Website:** React 19, TypeScript, Vite, Tailwind CSS v4 and Motion. Static site: no backend, no cookies, no third-party requests.
 - **Tooling:** oxlint, Prettier.
 - **Hosting:** GitHub Pages, deployed by GitHub Actions when `site/` changes on `main`.
-- **Business card:** HTML/CSS printed to PDF with headless Chrome/Edge, QR code generated with `qrcode`.
+- **Business card and banner:** HTML/CSS printed to PDF with headless Chrome/Edge, QR codes generated with `qrcode`.
 
 ## Structure
 
 - **`site/`**: the website.
 - **`business-card/`**: the printed business card.
+- **`banner/`**: the 3 × 1 m print banner and the Facebook cover.
 - **`brand/`**: the logo, colours and fonts.
 
 ## License

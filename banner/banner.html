@@ -1,0 +1,449 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8" />
+    <title>Baner Dobrze Tniemy</title>
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow/500.css" />
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow/600.css" />
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow-condensed/700.css" />
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow-condensed/700-italic.css" />
+    <link rel="stylesheet" href="node_modules/@fontsource/barlow-condensed/800-italic.css" />
+    <style>
+      :root {
+        --bg: #0a0f0b;
+        /* line and muted are lighter than on the site, so they stay visible in print. */
+        --line: #34483a;
+        --fg: #eef1e8;
+        --muted: #b3bfb4;
+        --accent: #8cc63f;
+      }
+      @page {
+        size: 3060mm 1060mm;
+        margin: 0;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        background: var(--bg);
+        print-color-adjust: exact;
+      }
+      /* Every size is in em, so one font-size scales a whole layout. */
+      .banner {
+        position: relative;
+        overflow: hidden;
+        color: var(--fg);
+        font-family: 'Barlow', sans-serif;
+        background:
+          linear-gradient(90deg, rgb(10 15 11 / 0.93), rgb(10 15 11 / 0.84)),
+          url('../site/src/assets/photos/zrebka-tekstura.jpg') center / cover;
+      }
+      p {
+        margin: 0;
+      }
+      .display {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-style: italic;
+        font-weight: 800;
+        line-height: 0.88;
+        text-transform: uppercase;
+      }
+      .acc {
+        color: var(--accent);
+      }
+      .label {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .tagline {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-style: italic;
+        font-weight: 700;
+        color: var(--accent);
+      }
+      .icon {
+        width: 1em;
+        height: 1em;
+        flex: none;
+      }
+
+      .photo,
+      .arc {
+        position: absolute;
+        left: 0;
+        border-radius: 0 var(--curve) var(--curve) 0 / 0 50% 50% 0;
+      }
+      .photo {
+        top: 0;
+        bottom: 0;
+        overflow: hidden;
+        box-shadow: 0 0 4em rgb(0 0 0 / 0.5);
+      }
+      .photo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .arc {
+        top: -1em;
+        bottom: -1em;
+        border: 0.6em solid var(--accent);
+        border-left: 0;
+      }
+
+      .content {
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+      }
+      h1 {
+        margin: 0.1em 0 0.12em;
+      }
+
+      .services {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-rows: auto auto;
+        justify-content: space-between;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+      }
+      .services li {
+        display: flex;
+        align-items: center;
+        gap: 0.45em;
+        font-weight: 600;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .services .icon {
+        width: 1.1em;
+        height: 1.1em;
+        color: var(--accent);
+      }
+
+      .stamp-at {
+        position: absolute;
+      }
+      .stamp {
+        display: inline-block;
+        padding: 0.32em 0.5em 0.24em;
+        border-radius: 0.2em;
+        background: var(--accent);
+        color: var(--bg);
+        box-shadow: 0 0.15em 0.6em rgb(0 0 0 / 0.35);
+        transform: rotate(-4deg);
+      }
+
+      .contact {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-top: 0.25em solid var(--line);
+      }
+      .phone {
+        display: flex;
+        align-items: center;
+        gap: 0.14em;
+        color: var(--accent);
+        white-space: nowrap;
+      }
+      .phone .icon {
+        width: 0.62em;
+        height: 0.62em;
+      }
+      .web {
+        display: flex;
+        align-items: center;
+        gap: 0.35em;
+        font-family: 'Barlow Condensed', sans-serif;
+        font-style: italic;
+        font-weight: 800;
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .web .icon {
+        width: 0.8em;
+        height: 0.8em;
+        color: var(--accent);
+      }
+      .visit {
+        display: flex;
+        align-items: center;
+      }
+      .qr {
+        display: block;
+        background: #fff;
+      }
+
+      /* Print: 3 x 1 m trim, 3 cm bleed on every side, text at least 6 cm inside the trim.
+         1em = 1 cm on the banner. */
+      .print {
+        --bleed: 3em;
+        --curve: 30em;
+        width: 306em;
+        height: 106em;
+        font-size: 10mm;
+      }
+      .print .photo {
+        width: 86em;
+      }
+      .print .photo img {
+        object-position: 50% 18%;
+      }
+      .print .arc {
+        width: 90.5em;
+      }
+      .print .content {
+        left: 112em;
+        right: 9em;
+        top: 9em;
+        bottom: 9em;
+      }
+      .print .brand {
+        gap: 5em;
+      }
+      .print .logo {
+        width: 25em;
+        height: 25em;
+      }
+      .print .brand .label {
+        font-size: 3.8em;
+      }
+      .print h1 {
+        font-size: 18.5em;
+      }
+      .print .tagline {
+        font-size: 5.4em;
+      }
+      .print .services {
+        gap: 4em 0;
+      }
+      .print .services li {
+        font-size: 4.8em;
+      }
+      .print .contact {
+        gap: 6em;
+        padding-top: 4em;
+      }
+      .print .contact .label {
+        font-size: 3.4em;
+      }
+      .print .phone {
+        margin-top: 0.08em;
+        font-size: 14.5em;
+      }
+      .print .visit {
+        gap: 5em;
+      }
+      .print .web {
+        margin-top: 0.12em;
+        font-size: 8em;
+      }
+      .print .qr {
+        width: 19em;
+        height: 19em;
+        padding: 1.5em;
+        border-radius: 0.8em;
+      }
+      .print .stamp-at {
+        right: 9em;
+        top: 12em;
+      }
+      .print .stamp {
+        font-size: 6.4em;
+      }
+
+      /* Facebook cover, 1640 x 624. Phones show only about x 350 to 1290 and y 0 to 570, at under
+         half size, with the profile picture over x 600 to 1020 from y 350. */
+      .fb {
+        width: 1640px;
+        height: 624px;
+        font-size: 6.24px;
+      }
+      .fb .photo {
+        width: 170em;
+        border-radius: 0;
+        box-shadow: none;
+        mask-image: linear-gradient(90deg, #000 58%, transparent 85%);
+      }
+      .fb .photo img {
+        object-position: 50% 28%;
+      }
+      .fb .content {
+        left: 141em;
+        width: 60em;
+        top: 4em;
+        height: 51em;
+        justify-content: center;
+        gap: 2.6em;
+      }
+      .fb h1 {
+        margin: 0;
+        font-size: 10.6em;
+        white-space: nowrap;
+      }
+      .fb .tagline {
+        margin-top: 0.6em;
+        font-size: 4.4em;
+      }
+      .fb .contact {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1em;
+        padding-top: 2.6em;
+        border-top-width: 0.2em;
+      }
+      .fb .phone {
+        font-size: 11.6em;
+      }
+      .fb .web {
+        font-size: 7.8em;
+      }
+      .fb .stamp-at {
+        left: 105em;
+        top: 7em;
+      }
+      .fb .stamp {
+        font-size: 4em;
+      }
+
+      /* ?print, ?fb, ?preview: show one layout. With no mode both are on the page, for editing. */
+      body.print-mode .fb,
+      body.fb-mode .print,
+      body.preview .fb {
+        display: none;
+      }
+      body.preview {
+        padding: 30px;
+        background: #d9dcd5;
+      }
+      body.preview .print {
+        margin: -15px;
+        font-size: 5px;
+        clip-path: inset(var(--bleed) round 0.6em);
+      }
+      @media screen {
+        body:not(.preview):not(.print-mode) .print {
+          font-size: 4px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="banner print" aria-label="Baner 3 × 1 m">
+      <div class="photo"><img src="../site/src/assets/photos/na-konarze.jpg" alt="" /></div>
+      <div class="arc"></div>
+      <div class="content">
+        <div class="brand">
+          <img class="logo" src="../brand/logo-white.svg" alt="" />
+          <div>
+            <p class="label">Usługi pilarskie i leśne · Arborysta Damian Treder</p>
+            <h1 class="display">Dobrze <span class="acc">tniemy</span></h1>
+            <p class="tagline">Precyzja na każdej wysokości.</p>
+          </div>
+        </div>
+        <ul class="services">
+          <li>
+            <svg class="icon"><use href="#check" /></svg>Wycinka drzew trudnych
+          </li>
+          <li>
+            <svg class="icon"><use href="#check" /></svg>Pielęgnacja koron
+          </li>
+          <li>
+            <svg class="icon"><use href="#check" /></svg>Frezowanie pni
+          </li>
+          <li>
+            <svg class="icon"><use href="#check" /></svg>Mulczowanie terenu
+          </li>
+          <li>
+            <svg class="icon"><use href="#check" /></svg>Zrębkowanie gałęzi
+          </li>
+          <li>
+            <svg class="icon"><use href="#check" /></svg>Sprzedaż drewna i zrębki
+          </li>
+        </ul>
+        <div class="contact">
+          <div>
+            <p class="label">Zadzwoń</p>
+            <p class="display phone">
+              <svg class="icon"><use href="#phone" /></svg>723 277 958
+            </p>
+          </div>
+          <div class="visit">
+            <div>
+              <p class="label">Realizacje i opinie</p>
+              <p class="web">
+                <svg class="icon"><use href="#globe" /></svg>dobrzetniemy.pl
+              </p>
+            </div>
+            <img class="qr" src="dist/qr.svg" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="stamp-at">
+        <p class="display stamp">Darmowa<br />wycena</p>
+      </div>
+    </section>
+
+    <section class="banner fb" aria-label="Okładka Facebooka">
+      <div class="photo"><img src="../site/src/assets/photos/na-konarze.jpg" alt="" /></div>
+      <div class="content">
+        <div>
+          <h1 class="display">Dobrze <span class="acc">tniemy</span></h1>
+          <p class="tagline">Precyzja na każdej wysokości.</p>
+        </div>
+        <div class="contact">
+          <p class="display phone">
+            <svg class="icon"><use href="#phone" /></svg>723 277 958
+          </p>
+          <p class="web">
+            <svg class="icon"><use href="#globe" /></svg>dobrzetniemy.pl
+          </p>
+        </div>
+      </div>
+      <div class="stamp-at">
+        <p class="display stamp">Darmowa<br />wycena</p>
+      </div>
+    </section>
+
+    <svg width="0" height="0" style="position: absolute">
+      <symbol id="check" viewBox="0 0 28 28" fill="none" stroke="currentColor">
+        <rect x="2.5" y="6.5" width="17" height="17" rx="3.5" stroke-width="2.4" />
+        <path
+          d="M7 14.5l4.5 4.5L25 4"
+          stroke-width="3"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </symbol>
+      <symbol id="phone" viewBox="0 0 24 24" fill="currentColor">
+        <path
+          d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z"
+        />
+      </symbol>
+      <symbol id="globe" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+        <circle cx="12" cy="12" r="9.5" />
+        <path
+          d="M2.5 12h19M12 2.5c2.6 2.6 3.9 5.8 3.9 9.5s-1.3 6.9-3.9 9.5c-2.6-2.6-3.9-5.8-3.9-9.5S9.4 5.1 12 2.5z"
+        />
+      </symbol>
+    </svg>
+
+    <script>
+      const mode = location.search.slice(1)
+      if (mode) document.body.classList.add(mode === 'preview' ? mode : `${mode}-mode`)
+    </script>
+  </body>
+</html>
